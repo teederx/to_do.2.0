@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo_2_0/widgets/bottom_sheets/add_task.dart';
+
+import '../tools/calendar.dart';
 
 class RoutineClass extends StatelessWidget {
   const RoutineClass({
@@ -23,18 +26,8 @@ class RoutineClass extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            height: calendarHeight,
-            color: const Color.fromARGB(255, 198, 190, 211),
-            child: const Center(
-              child: Text(
-                'Implement Calendar Here',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+          Calendar(
+            calendarHeight: calendarHeight,
           ),
           Container(
             height: height,
@@ -52,7 +45,19 @@ class RoutineClass extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => null,
+        onPressed: () => showModalBottomSheet(
+          context: context,
+          builder: (context) => const AddTask(),
+          elevation: 10,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          isScrollControlled: true,
+          useSafeArea: true,
+        ),
         child: const Icon(
           Icons.add_rounded,
           size: 35,
